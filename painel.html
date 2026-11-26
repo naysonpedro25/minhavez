@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MinhaVez · Painel do gestor</title>
+  <meta name="description" content="Painel do gestor da UBS no MinhaVez: fila do dia, agenda e avisos de imprevisto. Dados fictícios.">
+  <meta name="theme-color" content="#2563EB">
+  <link rel="icon" href="marca/icone-azul.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="minhavez.css">
+</head>
+<body class="mv panel-page">
+  <a class="skip" href="#panelBody">Pular para o conteúdo</a>
+  <header class="mv-nav">
+    <a class="mv-logo" href="index.html" aria-label="MinhaVez, início"><img src="marca/minhavez-horizontal-fundo-branco.svg" alt="MinhaVez"></a>
+    <nav aria-label="Páginas do protótipo">
+      <a href="index.html">Início</a>
+      <a href="whatsapp.html" target="whatsapp">WhatsApp do paciente</a>
+      <a href="painel.html" aria-current="page">Painel do gestor</a>
+    </nav>
+  </header>
+  <div class="demo-bar" role="region" aria-label="Controles da demonstração">
+    <div class="demo-in">
+      <span class="demo-tag">Simulação</span>
+      <span class="demo-now">Dia e hora na demonstração <b data-clock-label></b></span>
+      <div class="demo-acts" role="group" aria-label="Avançar o tempo">
+        <span class="demo-lbl">Avançar o tempo:</span>
+        <button type="button" class="demo-btn" data-clock="1h">+1 hora</button>
+        <button type="button" class="demo-btn" data-clock="18h" title="Às 18h saem os lembretes para quem tem consulta no dia seguinte">Até as 18h · lembretes</button>
+        <button type="button" class="demo-btn" data-clock="dia">Dia seguinte, 7h</button>
+      </div>
+      <button type="button" class="demo-btn ghost" id="resetBtn">Recomeçar a demonstração</button>
+    </div>
+  </div>
+
+  <main class="panel-wrap">
+    <section class="app" aria-label="Painel do Gestor da UBS">
+      <aside class="sidebar">
+        <div class="side-brand"><label class="side-ubs">Unidade<select id="ubsSelect"></select></label></div>
+        <nav class="nav" id="tabs" role="tablist">
+          <button type="button" role="tab" data-tab="fila"><svg viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>Fila de hoje<span class="count" id="filaCount" hidden></span></button>
+          <button type="button" role="tab" data-tab="agenda"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>Agenda</button>
+          <button type="button" role="tab" data-tab="balcao"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>Marcar no balcão</button>
+          <button type="button" role="tab" data-tab="imprevistos"><svg viewBox="0 0 24 24"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/></svg>Imprevistos</button>
+        </nav>
+        <div class="side-foot">Protótipo · dados fictícios</div>
+      </aside>
+      <div class="app-main">
+        <header class="app-header">
+          <div><h1 id="panelTitle">Fila de hoje</h1><p id="panelSub"></p></div>
+          <div class="app-user"><span class="avatar">GU</span><div><strong>Recepção</strong><span id="userUbs">UBS Centro</span></div></div>
+        </header>
+        <div class="panel-body" id="panelBody"></div>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal" id="impModal" hidden>
+    <div class="modal-back" data-action="imp-fechar" aria-hidden="true"></div>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="impTitle" tabindex="-1">
+      <header class="modal-head"><h2 id="impTitle">Registrar imprevisto</h2><button type="button" class="sheet-x" data-action="imp-fechar" aria-label="Fechar">✕</button></header>
+      <div class="modal-body" id="impBody"></div>
+    </div>
+  </div>
+  <details class="roteiro" id="roteiro" data-roteiro="gestor" open>
+    <summary><span>Roteiro da demo</span><b data-roteiro-n></b></summary>
+    <ol data-roteiro-list></ol>
+  </details>
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MinhaVez · WhatsApp do paciente</title>
+  <meta name="description" content="Simulação do WhatsApp Business do MinhaVez: marcação de consulta, lembrete da véspera e avisos da fila. Dados fictícios.">
+  <meta name="theme-color" content="#2563EB">
+  <link rel="icon" href="marca/icone-azul.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="minhavez.css">
+</head>
+<body class="mv wa-page" data-biz="1">
+  <a class="skip" href="#chat">Pular para a conversa</a>
+  <header class="mv-nav">
+    <a class="mv-logo" href="index.html" aria-label="MinhaVez, início"><img src="marca/minhavez-horizontal-fundo-branco.svg" alt="MinhaVez"></a>
+    <nav aria-label="Páginas do protótipo">
+      <a href="index.html">Início</a>
+      <a href="whatsapp.html" aria-current="page">WhatsApp do paciente</a>
+      <a href="painel.html" target="painel">Painel do gestor</a>
+    </nav>
+  </header>
+  <div class="demo-bar" role="region" aria-label="Controles da demonstração">
+    <div class="demo-in">
+      <span class="demo-tag">Simulação</span>
+      <span class="demo-now">Dia e hora na demonstração <b data-clock-label></b></span>
+      <div class="demo-acts" role="group" aria-label="Avançar o tempo">
+        <span class="demo-lbl">Avançar o tempo:</span>
+        <button type="button" class="demo-btn" data-clock="1h">+1 hora</button>
+        <button type="button" class="demo-btn" data-clock="18h" title="Às 18h saem os lembretes para quem tem consulta no dia seguinte">Até as 18h · lembretes</button>
+        <button type="button" class="demo-btn" data-clock="dia">Dia seguinte, 7h</button>
+      </div>
+      <button type="button" class="demo-btn ghost" id="resetBtn">Recomeçar a demonstração</button>
+    </div>
+  </div>
+
+  <main class="wa-stage">
+    <aside class="wa-side">
+      <section class="mv-card">
+        <h2>De quem é este celular</h2>
+        <p class="muted" id="chatWho"></p>
+        <div class="contacts" id="contacts"></div>
+      </section>
+    </aside>
+
+    <section class="wa-phone-wrap" aria-label="WhatsApp simulado">
+      <div class="phone wa">
+        <div class="phone-status"><span id="phoneTime"></span><span class="phone-icons" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2 20h3v-4H2zm5 0h3v-8H7zm5 0h3V8h-3zm5 0h3V4h-3z"/></svg><svg viewBox="0 0 24 24"><rect x="2" y="7" width="18" height="10" rx="2"/><path d="M22 10v4"/><rect x="4" y="9" width="11" height="6" rx="1" class="fill"/></svg></span></div>
+        <div class="wa-head">
+          <span class="wa-back" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></span>
+          <button type="button" class="wa-who" data-action="perfil" aria-label="Ver perfil comercial da MinhaVez">
+            <img src="marca/icone-azul.svg" alt="" width="38" height="38">
+            <span><strong>MinhaVez <svg class="verified" viewBox="0 0 24 24" aria-label="Conta verificada"><path d="M12 1.5l2.6 2 3.2-.3 1 3.1 2.8 1.6-.8 3.1 1.7 2.8-2.4 2.1-.2 3.2-3.2.4-2 2.5-3-1.2-3 1.2-2-2.5-3.2-.4-.2-3.2L.4 14l1.7-2.8-.8-3.1 2.8-1.6 1-3.1 3.2.3z"/><path class="ck" d="M7.5 12.2l3 3 6-6.2"/></svg></strong><em>UBS de Maragogi · conta comercial</em></span>
+          </button>
+          <span class="wa-icons" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3"/></svg><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="12" cy="19" r="1.4"/></svg></span>
+        </div>
+        <div class="chat" id="chat" aria-live="polite" tabindex="-1"></div>
+        <form class="composer" id="composer" autocomplete="off">
+          <div class="wa-input"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5a4.5 4.5 0 0 0 7 0M9 9.5h.01M15 9.5h.01"/></svg><input id="msgInput" type="text" placeholder="Mensagem" aria-label="Mensagem"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5l-8.5 8.5a5 5 0 0 1-7-7l8.5-8.5a3.3 3.3 0 0 1 4.7 4.7L10.2 17.7a1.7 1.7 0 0 1-2.4-2.4L15.6 7.5"/></svg></div>
+          <button type="submit" class="send" aria-label="Enviar"><svg viewBox="0 0 24 24"><path d="M3 20l18-8L3 4l2.5 8zM5.5 12H12"/></svg></button>
+        </form>
+
+        <div class="sheet" id="listSheet" hidden role="dialog" aria-modal="true" aria-labelledby="listTitle">
+          <div class="sheet-card">
+            <div class="sheet-top"><button type="button" class="sheet-x" data-action="list-close" aria-label="Fechar">✕</button><strong id="listTitle" data-list-title></strong></div>
+            <div class="sheet-opts" data-list-opts></div>
+            <button type="button" class="sheet-send" data-action="list-send">Enviar</button>
+          </div>
+        </div>
+
+        <div class="sheet" id="bizSheet" hidden role="dialog" aria-modal="true" aria-labelledby="bizName">
+          <div class="sheet-card biz-profile">
+            <div class="sheet-top"><button type="button" class="sheet-x" data-action="perfil-close" aria-label="Fechar">✕</button><strong>Perfil comercial</strong></div>
+            <div class="biz-scroll">
+              <img src="marca/icone-azul.svg" alt="Logo MinhaVez" width="88" height="88" class="biz-logo">
+              <h3 id="bizName">MinhaVez · UBS de Maragogi <svg class="verified" viewBox="0 0 24 24" aria-label="Conta verificada"><path d="M12 1.5l2.6 2 3.2-.3 1 3.1 2.8 1.6-.8 3.1 1.7 2.8-2.4 2.1-.2 3.2-3.2.4-2 2.5-3-1.2-3 1.2-2-2.5-3.2-.4-.2-3.2L.4 14l1.7-2.8-.8-3.1 2.8-1.6 1-3.1 3.2.3z"/><path class="ck" d="M7.5 12.2l3 3 6-6.2"/></svg></h3>
+              <p class="biz-cat">Serviço público de saúde</p>
+              <p class="biz-desc">Canal oficial de marcação de consultas gerais (enfermagem e clínico geral) das UBS de Maragogi. Você escolhe o dia e recebe uma janela de chegada de 1 hora.</p>
+              <ul class="biz-info">
+                <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span><b>Horário da equipe</b> Seg a sex, 7h às 17h<br><span id="bizStatus"></span></span></li>
+                <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span><b>Onde</b> UBS Centro e UBS São Bento, Maragogi · AL</span></li>
+                <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4z"/><path d="M4 7l8 6 8-6"/></svg><span><b>E-mail</b> contato@minhavez.example</span></li>
+                <li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span><b>Privacidade</b> As mensagens não levam dados clínicos.</span></li>
+              </ul>
+              <div class="biz-auto">
+                <span>Mensagens automáticas desta conta</span>
+                <p><b>Boas-vindas</b> Apresenta o canal e pede o CPF ou o Cartão SUS.</p>
+                <p><b>Ausência</b> Fora do horário, avisa que a equipe responde depois, mas a marcação continua.</p>
+                <p><b>Lembrete da véspera</b> Às 18h, com os botões Confirmo e Não vou.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <details class="roteiro" id="roteiro" data-roteiro="paciente" open>
+    <summary><span>Roteiro da demo</span><b data-roteiro-n></b></summary>
+    <ol data-roteiro-list></ol>
+  </details>
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
