@@ -15,12 +15,14 @@ Hoje, quem precisa de consulta com enfermagem ou clínico geral nas UBS de Marag
 
 **Demo online:** https://naysonpedro25.github.io/minhavez/
 
-Também dá para baixar a pasta e abrir o `index.html` no navegador, sem instalar nada. A página inicial leva às duas partes da demo:
+Também dá para baixar a pasta e abrir o `index.html` no navegador, sem instalar nada.
 
-- `whatsapp.html`: o celular do paciente;
-- `painel.html`: o painel da recepção da UBS.
+O protótipo é uma página só. O menu do topo troca de tela sem recarregar:
 
-As duas páginas compartilham o mesmo estado. Com uma em cada aba, o que acontece em uma aparece na outra. O estado fica guardado no navegador, e **Recomeçar a demonstração** volta tudo ao início.
+- `#/whatsapp`: o celular do paciente ([abrir](https://naysonpedro25.github.io/minhavez/#/whatsapp));
+- `#/painel`: o painel da recepção da UBS ([abrir](https://naysonpedro25.github.io/minhavez/#/painel)).
+
+O que acontece numa tela aparece na outra. O estado fica guardado no navegador, e **Recomeçar a demonstração** volta tudo ao início.
 
 ## Roteiro rápido
 
@@ -38,15 +40,14 @@ As duas páginas compartilham o mesmo estado. Com uma em cada aba, o que acontec
 3. Toque em **Registrar imprevisto de hoje**, diga o que aconteceu e escolha o que fazer com os pacientes afetados. O histórico fica na aba **Imprevistos**.
 4. Em **Marcar no balcão**, marque para quem chegou sem celular.
 
-Cada página tem um **Roteiro da demo** no canto, que vai se marcando conforme as etapas são feitas.
+Cada tela tem um **Roteiro da demo** no canto, que vai se marcando conforme as etapas são feitas.
 
 ## Arquivos
 
 | Arquivo | O que é |
 |---|---|
-| `index.html` | Página inicial |
-| `whatsapp.html` | Simulação do WhatsApp do paciente |
-| `painel.html` | Painel da UBS |
-| `app.js` | Dados fictícios, regras da fila e da agenda |
+| `index.html` | O protótipo inteiro: início, WhatsApp e painel |
+| `app.js` | Dados fictícios, regras da fila e da agenda, troca de telas |
+| `whatsapp.html`, `painel.html` | Só redirecionam links antigos para a tela certa |
 | `styles.css`, `minhavez.css` | Estilos |
 | `marca/` | Logo e ícone do MinhaVez |

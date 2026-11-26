@@ -271,3 +271,6 @@ svg.ticks { width: 16px; height: 11px; fill: none; stroke: var(--brand); stroke-
 .modal-body { padding: 20px 24px 24px; }
 .panel-page .roteiro { width: 250px; }
 @media (max-width: 860px) { .panel-page .roteiro { width: auto; } }
+
+/* Uma página só: as telas que não estão abertas ficam escondidas */
+[data-view][hidden] { display: none !important; }

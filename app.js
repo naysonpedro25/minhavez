@@ -1361,7 +1361,38 @@
   if (autoChamar()) save();
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && S.impModal) { S.impModal = false; save(); render(); } });
 
+  // Uma página só: #/whatsapp e #/painel trocam a tela sem recarregar
+  const TELAS = {
+    inicio: ['hub', 'MinhaVez · Protótipo', null],
+    whatsapp: ['wa-page', 'MinhaVez · WhatsApp do paciente', 'paciente'],
+    painel: ['panel-page', 'MinhaVez · Painel do gestor', 'gestor'],
+  };
+  function abrirTela() {
+    if (!document.querySelector('[data-view]')) return render();
+    const h = location.hash;
+    const m = h.match(/^#\/(whatsapp|painel)?$/);
+    if (h && h !== '#' && !m) return; // âncora comum, não é troca de tela
+    const v = (m && m[1]) || 'inicio';
+    const [cls, titulo, rot] = TELAS[v];
+    document.body.classList.remove('hub', 'wa-page', 'panel-page');
+    document.body.classList.add(cls);
+    document.querySelectorAll('[data-view]').forEach(el => { el.hidden = !el.dataset.view.split(' ').includes(v); });
+    document.querySelectorAll('[data-route]').forEach(l => { if (l.dataset.route === v) l.setAttribute('aria-current', 'page'); else l.removeAttribute('aria-current'); });
+    if (rot) $('roteiro').dataset.roteiro = rot;
+    if (v !== 'painel') S.impModal = false;
+    document.title = titulo;
+    render();
+    window.scrollTo(0, 0);
+  }
+  window.addEventListener('hashchange', abrirTela);
+  const skip = document.querySelector('.skip');
+  if (skip && document.querySelector('[data-view]')) skip.addEventListener('click', e => {
+    e.preventDefault();
+    const alvo = document.querySelector('main[data-view]:not([hidden])');
+    if (alvo) { alvo.tabIndex = -1; alvo.focus(); }
+  });
+
   window.UBSProto = { get state() { return S; }, render, reset() { S = freshState(); save(); render(); } };
 
-  render();
+  abrirTela();
 })();
