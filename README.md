@@ -13,7 +13,9 @@ Hoje, quem precisa de consulta com enfermagem ou clínico geral nas UBS de Marag
 
 ## Como abrir
 
-Baixe a pasta e abra o `index.html` no navegador. Não precisa instalar nada. A página inicial leva às duas partes da demo:
+**Demo online:** https://naysonpedro25.github.io/minhavez/
+
+Também dá para baixar a pasta e abrir o `index.html` no navegador, sem instalar nada. A página inicial leva às duas partes da demo:
 
 - `whatsapp.html`: o celular do paciente;
 - `painel.html`: o painel da recepção da UBS.
@@ -45,7 +47,6 @@ Cada página tem um **Roteiro da demo** no canto, que vai se marcando conforme a
 | `index.html` | Página inicial |
 | `whatsapp.html` | Simulação do WhatsApp do paciente |
 | `painel.html` | Painel da UBS |
-| `lado-a-lado.html` | As duas partes na mesma tela |
 | `app.js` | Dados fictícios, regras da fila e da agenda |
 | `styles.css`, `minhavez.css` | Estilos |
 | `marca/` | Logo e ícone do MinhaVez |
